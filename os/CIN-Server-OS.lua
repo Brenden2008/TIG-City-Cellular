@@ -31,5 +31,5 @@ print("[SUCCESS] Added!")
 print("[INFO] CIN Server started as CIN: "..cin_number_unloaded.." !")
 while true do
   event, senderId, message, distance = os.pullEvent("rednet_message")
-  print( "Computer: "..senderId.." sent a message: "..message.." from "..distance.." blocks away!" )
+  print( "Computer: "..senderId.." sent a message: "..message[0].." from "..distance.." blocks away!" )
 end
