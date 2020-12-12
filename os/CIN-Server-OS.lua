@@ -31,5 +31,23 @@ print("[SUCCESS] Added!")
 print("[INFO] CIN Server started as CIN: "..cin_number_unloaded.." !")
 while true do
   local senderId, message, protocol = rednet.receive()
-  print(message)
+  if protocal == "MCSMS" then
+    local randomMsgNumber = math.random(000000,999999)
+    print("[INFO] A message was sent to this CIN Server! Storing as message number: "..randomMsgNumber.." .")
+    local messageFile = fs.open(randomMsgNumber, "w")
+    local decodedMsg = textutils.unserialize(message)
+    local textMessage = decodedMsg["message"]
+    messageFile.write(textMessage)
+    messageFile.flush()
+    print("[SUCCESS] Saved to file!")
+    messageFile.close()
+    local messageListFile = fs.open(msgList.txt, "w")
+  elseif protocal == "MCCINSERVER" then
+    print("[INFO] A command was sent to this CIN.")
+    local decodedCommand = textutils.unserialize(message)
+    if decodedCommand["serviceid"] == carrier_service_id.readAll() then
+      if decodedCommand["servicepw"] == carrier_service_pw.readAll() then
+        if decodedCommand["command"] == 1 then
+          
+  end
 end
